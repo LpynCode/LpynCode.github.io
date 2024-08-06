@@ -1,0 +1,44 @@
+.words {
+    user-select: none;
+    height: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+
+    margin-left: unset;
+    height: 204px;
+    overflow: hidden;
+    transition: 0.25s;
+}
+
+.word {
+    font-size: 35px;
+    line-height: 35px;
+    margin: 5px;
+
+    color: var(--sub-color);
+
+    border-bottom: 2px solid transparent;
+}
+
+.word_error {
+    border-bottom: 2px solid var(--error-color);
+}
+
+
+.letter {
+    display: inline-block;
+}
+
+.typed {
+    color: var(--text-color);
+}
+
+.letter_error {
+    color: var(--error-color);
+}
+
+
+.letter_extra {
+    color: var(--error-extra-color)
+}

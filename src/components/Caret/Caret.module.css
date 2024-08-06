@@ -1,0 +1,17 @@
+.caret {
+    position: absolute;
+    width: .1em;
+    height: 1.2em;
+    background-color: var(--caret-color);
+
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

@@ -1,0 +1,6 @@
+.input {
+    z-index: -1;
+    user-select: none;
+    position: absolute;
+    pointer-events: none;
+}
