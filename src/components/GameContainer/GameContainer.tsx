@@ -55,13 +55,13 @@ export const GameContainer = () => {
     }
 
     const restartGame = () => {
-        setStopped(false)
         setFinished(false)
         setSeconds(initialSeconds)
         fetchText()
     }
 
     const handleChange = (letter: string) => {
+        console.log(letter)
         setStopped(false)
         handleLetter(letter)
     }

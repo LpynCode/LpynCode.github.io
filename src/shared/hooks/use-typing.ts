@@ -62,15 +62,17 @@ export const useTyping = ({initialText, fontWidthPX, wordMarginPX, padding, wind
 
     const _newWord = useCallback(() => {
         if(currentLetterIndex === 0 || currentWordIndex + 1 === wordsArray.length) return
+        
         const newArray = [...wordsArray]
-        newArray[currentWordIndex].isSuccess = checkWordIsSuccess(newArray[currentWordIndex])
+        const lastWordIsSuccess = checkWordIsSuccess(newArray[currentWordIndex])
+        newArray[currentWordIndex].isSuccess = lastWordIsSuccess
+        if(lastWordIsSuccess) setCountWords((prev) => prev + 1)
         newArray[currentWordIndex].isTyped = true
         setWordsArray(newArray)
         setCurrentWordIndex((prev) => prev + 1)
         const newTotalIndex = wordsArray.slice(lines.slice(0, lineIndex).reduce((acc, word) => acc + word, 0), currentWordIndex + 1).reduce((acc, word) => acc + word.length + word.extraLength, 0) + wordInLine + 1
         setTotalIndex(newTotalIndex)
         setCurrentLetterIndex(0)
-        setCountWords((prev) => prev + 1)
         setWordInLine((prev) => {
             if(prev === lines[lineIndex] - 1) {
                 setLineIndex((prev) => prev + 1)

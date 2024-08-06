@@ -21,6 +21,7 @@ export const TypingInput = forwardRef(({handleChange, ...props}: TypingInputProp
     }
 
     useEffect(() => {
+        if(!lastLetter.letter) return
         handleChange(lastLetter.letter)
     }, [lastLetter])
 
