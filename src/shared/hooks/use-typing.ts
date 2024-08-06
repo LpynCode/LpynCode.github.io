@@ -37,30 +37,35 @@ export const useTyping = ({initialText, fontWidthPX, wordMarginPX, padding, wind
     }, [initialText])
 
     const lines = useMemo(() => getWordLines(wordsArray, fontWidthPX, wordMarginPX, padding, windowWidth), [fontWidthPX, padding, windowWidth, wordMarginPX, wordsArray])
-
     const _addLetter = useCallback((letter: string) => {
         const newArray = [...wordsArray]
-        flushSync(() => {
-            setCurrentLetterIndex((prev) => prev + 1)
-        })
-        setTotalIndex((prev) => prev + 1)
 
         // extra letter
         if(currentLetterIndex >= wordsArray[currentWordIndex].length) {
+            if(newArray[currentWordIndex].letters.reduce((acc, letter) => acc + (letter.isExtra ? 1 : 0), 0) > 2) return
             newArray[currentWordIndex].letters.push({letter, isSuccess: false, isTyped: true, isExtra: true})
             newArray[currentWordIndex].extraLength += 1
             setWordsArray(newArray)
             setErrors((prev) => prev + 1)
+            flushSync(() => {
+                setCurrentLetterIndex((prev) => prev + 1)
+            })
+            setTotalIndex((prev) => prev + 1)
             return
         }
+
+        flushSync(() => {
+            setCurrentLetterIndex((prev) => prev + 1)
+        })
+        setTotalIndex((prev) => prev + 1)
         
         const currentLetter = wordsArray[currentWordIndex].letters[currentLetterIndex]
         newArray[currentWordIndex].letters[currentLetterIndex] = {letter: currentLetter.letter, isSuccess: letter === currentLetter.letter, isTyped: true, isExtra: false}
         if(letter !== currentLetter.letter) setErrors((prev) => prev + 1)
         setWordsArray(newArray)
 
-    }, [currentWordIndex, currentLetterIndex, wordsArray])
-    console.log(countWords)
+    }, [wordsArray, lines, lineIndex, wordInLine, padding, fontWidthPX, windowWidth, currentLetterIndex, currentWordIndex, wordMarginPX])
+
     const _newWord = useCallback(() => {
         if(currentLetterIndex === 0 || currentWordIndex + 1 === wordsArray.length) return
 

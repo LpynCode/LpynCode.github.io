@@ -9,7 +9,7 @@ export const getWordLines = (words: IWord[], fontWidthPX: number, wordMarginPX: 
 
     for(let i = 0; i < words.length; i++) {
         const word = words[i]
-        const currentLineLength = word.length*fontWidthPX + wordMarginPX*2
+        const currentLineLength = (word.length + word.extraLength)*fontWidthPX + wordMarginPX*2
         lineLength += currentLineLength
         if(!lines[currentLine]) lines[currentLine] = 0
         if(lineLength <= totalWidthPX) {

@@ -12,8 +12,8 @@
 }
 
 .word {
-    font-size: 35px;
-    line-height: 35px;
+    font-size: 1em;
+    line-height: 1em;
     margin: 5px;
 
     color: var(--sub-color);

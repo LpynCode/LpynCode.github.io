@@ -15,13 +15,12 @@ export const GameContainer = () => {
     const {text, fetchText} = useTextStore()
     const {setInfo} = useInfoStore()
     const initialSeconds = 30
-    const fontWidthPX = 19
-    const padding = 5
+    const fontWidthPX = document.querySelector('span')?.clientWidth || 0
 
+    const padding = 5
     const countLines = 3; 
     const fontSizePX = 35;
     const wordMarginPX = 5;
-    const caretHeightPX = 10;
     const {width: windowWidth} = useWindowSize(1440);
 
     const {handleLetter, wordsArray, totalIndex, lineIndex, wordInLine, errors, countWords} = useTyping({ initialText: text, fontWidthPX, wordMarginPX, padding, windowWidth})
@@ -38,9 +37,9 @@ export const GameContainer = () => {
 
     const [caretLeft, caretTop] = useMemo(() => {
         const XIndex = (totalIndex - wordInLine) * fontWidthPX + padding + wordMarginPX + wordInLine*wordMarginPX*2 + 'px'
-        const YIndex = lineIndex*fontSizePX + padding + lineIndex*wordMarginPX*2 + caretHeightPX + 'px'
+        const YIndex = lineIndex*fontSizePX + padding + lineIndex*wordMarginPX*2 + 'px'
         return [XIndex, YIndex]
-    }, [lineIndex, wordInLine, totalIndex])
+    }, [totalIndex, wordInLine, fontWidthPX, lineIndex])
 
     const height = useMemo(() => {
         const totalHeight = countLines*fontSizePX + padding*2 + (countLines)*wordMarginPX*2 + 'px'
@@ -56,6 +55,7 @@ export const GameContainer = () => {
 
     const restartGame = () => {
         setFinished(false)
+        setStopped(true)
         setSeconds(initialSeconds)
         fetchText()
     }

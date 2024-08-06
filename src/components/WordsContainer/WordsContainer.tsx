@@ -3,6 +3,7 @@ import styles from "./WordsContainer.module.css"
 import cn from "classnames"
 
 export const WordsContainer = ({words, ...props}: WordsContainerProps) => {
+
     return (
         <div className={styles.words} {...props}>
             {words.map((word, index) => <div className={cn(styles.word, {[styles.word_error]: !word.isSuccess && word.isTyped})} key={index}>
