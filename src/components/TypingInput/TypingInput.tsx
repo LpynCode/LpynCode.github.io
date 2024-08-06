@@ -15,7 +15,6 @@ export const TypingInput = forwardRef(({handleChange, ...props}: TypingInputProp
             } else {
                 setLastLetter({letter: str.slice(-1)})
             }
-
             return str
         })
     }

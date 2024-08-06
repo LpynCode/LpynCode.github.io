@@ -61,7 +61,6 @@ export const GameContainer = () => {
     }
 
     const handleChange = (letter: string) => {
-        console.log(letter)
         setStopped(false)
         handleLetter(letter)
     }

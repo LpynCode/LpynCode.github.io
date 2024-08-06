@@ -5,6 +5,7 @@ import { findLastTypedLetterIndex } from "../helpers/find-last-typed-letter-inde
 import { formatWords } from "../helpers/format-words"
 import { flushSync } from "react-dom"
 import { getWordLines } from "../helpers/get-word-lines"
+import { checkWordIsTyped } from "../helpers/check-word-is-typed"
 
 interface UseTypingProps {
     initialText: string
@@ -59,14 +60,13 @@ export const useTyping = ({initialText, fontWidthPX, wordMarginPX, padding, wind
         setWordsArray(newArray)
 
     }, [currentWordIndex, currentLetterIndex, wordsArray])
-
+    console.log(countWords)
     const _newWord = useCallback(() => {
         if(currentLetterIndex === 0 || currentWordIndex + 1 === wordsArray.length) return
-        
+
         const newArray = [...wordsArray]
-        const lastWordIsSuccess = checkWordIsSuccess(newArray[currentWordIndex])
-        newArray[currentWordIndex].isSuccess = lastWordIsSuccess
-        if(lastWordIsSuccess) setCountWords((prev) => prev + 1)
+        newArray[currentWordIndex].isSuccess = checkWordIsSuccess(newArray[currentWordIndex])
+        if(checkWordIsTyped(newArray[currentWordIndex])) setCountWords((prev) => prev + 1)
         newArray[currentWordIndex].isTyped = true
         setWordsArray(newArray)
         setCurrentWordIndex((prev) => prev + 1)
