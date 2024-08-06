@@ -14,7 +14,7 @@ import { useInfoStore } from "../../store/info.store"
 export const GameContainer = () => {
     const {text, fetchText} = useTextStore()
     const {setInfo} = useInfoStore()
-    const initialSeconds = 10
+    const initialSeconds = 30
     const fontWidthPX = 19
     const padding = 5
 
